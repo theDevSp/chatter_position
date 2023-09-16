@@ -48,7 +48,7 @@ import {patch} from "@web/core/utils/patch";
  * a specific position regardless of the screen size, depending on an user setting.
  */
 
-patch(MailFormCompiler.prototype, "chatter_position", {
+patch(MailFormCompiler.prototype, "web_chatter_position", {
     /**
      * Patch the visibility of the Sided chatter (`C` above).
      *
@@ -63,18 +63,18 @@ patch(MailFormCompiler.prototype, "chatter_position", {
             return res;
         }
         // Don't patch anything if the setting is "auto": this is the core behaviour
-        if (odoo.chatter_position === "auto") {
+        if (odoo.web_chatter_position === "auto") {
             return res;
-        } else if (odoo.chatter_position === "sided") {
+        } else if (odoo.web_chatter_position === "sided") {
             chatterContainerHookXml.setAttribute("t-if", "!hasAttachmentViewer()");
-        } else if (odoo.chatter_position === "bottom") {
+        } else if (odoo.web_chatter_position === "bottom") {
             chatterContainerHookXml.setAttribute("t-if", false);
         }
         return res;
     },
 });
 
-patch(FormCompiler.prototype, "chatter_position", {
+patch(FormCompiler.prototype, "web_chatter_position", {
     /**
      * Patch the css classes of the `Form`, to include an extra `h-100` class.
      * Without it, the form sheet will not be full height in some situations,
@@ -125,7 +125,10 @@ patch(FormCompiler.prototype, "chatter_position", {
                 sheetBgChatterContainerHookXml.setAttribute("t-if", true);
                 chatterContainerHookXml.setAttribute("t-if", false);
             } else {
-                const formSheetBgXml = res.querySelector(".o_form_sheet_bg") ? res.querySelector(".o_form_sheet_bg") : res.querySelector(".o_form_nosheet");
+                const formSheetBgXml = res.querySelector(".o_form_sheet_bg");
+                if (!formSheetBgXml) {
+                    return res;
+                }
                 const sheetBgChatterContainerHookXml =
                     chatterContainerHookXml.cloneNode(true);
                 sheetBgChatterContainerHookXml.classList.add("o-isInFormSheetBg");
@@ -141,7 +144,7 @@ patch(FormCompiler.prototype, "chatter_position", {
     },
 });
 
-patch(FormController.prototype, "chatter_position", {
+patch(FormController.prototype, "web_chatter_position", {
     /**
      * Patch the css classes of the form container, to include an extra `flex-row` class.
      * Without it, it'd go for flex columns direction and it won't look good.
