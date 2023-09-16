@@ -63,11 +63,11 @@ patch(MailFormCompiler.prototype, "chatter_position", {
             return res;
         }
         // Don't patch anything if the setting is "auto": this is the core behaviour
-        if (odoo.web_chatter_position === "auto") {
+        if (odoo.chatter_position === "auto") {
             return res;
-        } else if (odoo.web_chatter_position === "sided") {
+        } else if (odoo.chatter_position === "sided") {
             chatterContainerHookXml.setAttribute("t-if", "!hasAttachmentViewer()");
-        } else if (odoo.web_chatter_position === "bottom") {
+        } else if (odoo.chatter_position === "bottom") {
             chatterContainerHookXml.setAttribute("t-if", false);
         }
         return res;
@@ -150,7 +150,7 @@ patch(FormController.prototype, "chatter_position", {
      */
     get className() {
         const result = this._super();
-        if (odoo.web_chatter_position === "bottom") {
+        if (odoo.web_chatter_position === "sided") {
             result["flex-row"] = true;
         }
         return result;
