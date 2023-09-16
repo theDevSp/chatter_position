@@ -150,7 +150,7 @@ patch(FormController.prototype, "chatter_position", {
      */
     get className() {
         const result = this._super();
-        if (odoo.web_chatter_position === "sided") {
+        if (odoo.web_chatter_position === "bottom") {
             result["flex-row"] = true;
         }
         return result;
