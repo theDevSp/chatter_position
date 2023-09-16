@@ -48,7 +48,7 @@ import {patch} from "@web/core/utils/patch";
  * a specific position regardless of the screen size, depending on an user setting.
  */
 
-patch(MailFormCompiler.prototype, "web_chatter_position", {
+patch(MailFormCompiler.prototype, "chatter_position", {
     /**
      * Patch the visibility of the Sided chatter (`C` above).
      *
@@ -74,7 +74,7 @@ patch(MailFormCompiler.prototype, "web_chatter_position", {
     },
 });
 
-patch(FormCompiler.prototype, "web_chatter_position", {
+patch(FormCompiler.prototype, "chatter_position", {
     /**
      * Patch the css classes of the `Form`, to include an extra `h-100` class.
      * Without it, the form sheet will not be full height in some situations,
@@ -141,7 +141,7 @@ patch(FormCompiler.prototype, "web_chatter_position", {
     },
 });
 
-patch(FormController.prototype, "web_chatter_position", {
+patch(FormController.prototype, "chatter_position", {
     /**
      * Patch the css classes of the form container, to include an extra `flex-row` class.
      * Without it, it'd go for flex columns direction and it won't look good.
