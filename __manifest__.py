@@ -13,7 +13,7 @@
     "data": ["views/res_users.xml", "views/web.xml"],
     "assets": {
         "web.assets_backend": [
-            "/web_chatter_position/static/src/**/*.js",
+            "/chatter_position/static/src/**/*.js",
         ],
     },
 }
